@@ -1,0 +1,22 @@
+{
+  "tasks":[
+    {
+      "id": 1,
+      "tittle": "Read book",
+      "description": "read a book when free time",
+      "status": 0
+    },
+    {
+      "id": 2,
+      "tittle": "Play game",
+      "description": "I usually play lol game",
+      "status": 1
+    },
+    {
+      "id": 3,
+      "tittle": "Go to pcinic",
+      "description": "In summer, i go to picnic in Da Lat",
+      "status": 2
+    }
+  ]
+}

@@ -5,6 +5,15 @@ const theme = createMuiTheme({
         primary : "#D32F2F",
         secondary : "#00BCD4",
         error: "#FFA000"
+    },
+    typography : {
+        fontFamily : "Roboto"
+    },
+    shape : {
+        borderRadius : 4,
+        backgroundColor : "#7B1FA2",
+        textColor : "white",
+        borderColor :"#CCCCC",
     }
     
   });
