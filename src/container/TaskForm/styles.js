@@ -1,6 +1,6 @@
 const styles = (theme) => ({
-  button : {
-    marginRight : 10
-  }
+  textField: {
+    width: "100%",
+  },
 });
 export default styles;

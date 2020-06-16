@@ -6,6 +6,10 @@ import Taskboard from "./../Taskboard";
 import theme from "./../../commons/Theme";
 import { Provider } from "react-redux";
 import configureStore from "../../redux/configureStore";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer} from 'react-toastify';
+import GlobalLoading from './../../component/GlobalLoading/index'
+import ModalTodo from "../../component/Modal";
 
 const store = configureStore();
 
@@ -14,6 +18,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <ToastContainer />
+          <GlobalLoading/>
+          <ModalTodo/>
           <Taskboard />
         </ThemeProvider>
       </Provider>
