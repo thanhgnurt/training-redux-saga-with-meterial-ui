@@ -1,6 +1,7 @@
 import { withStyles } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import AddIcon from "@material-ui/icons/Add";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -30,6 +31,62 @@ class Taskboard extends Component {
     const { fetchListTask } = taskActionCreators;
     fetchListTask();
   };
+  handleEditTask = (task) => {
+    const { taskActionCreators, modalActionCreators } = this.props;
+    const { setTaskEditting } = taskActionCreators;
+    setTaskEditting(task);
+    const {
+      showModal,
+      changeModalContent,
+      changeModalTittle,
+    } = modalActionCreators;
+    showModal();
+    changeModalTittle("Edit Task");
+    changeModalContent(<TaskForm />);
+  };
+
+  handleDeleteTask = (task) => {
+    const { id } = task;
+    const { taskActionCreators} = this.props;
+    const {deleteTask} = taskActionCreators;
+    deleteTask(id)
+  };
+
+  showModalDeleteTask = (task) => {
+    const { modalActionCreators, classes } = this.props;
+    const {
+      showModal,
+      hideModal,
+      changeModalContent,
+      changeModalTittle,
+    } = modalActionCreators;
+    showModal();
+    changeModalTittle("Delete Task");
+    changeModalContent(
+      <div className={classes.modalDelete}>
+        <div className={classes.modalComfirmText}>
+          Do you delete this task :
+          <span className={classes.modalConfirmTextBold}> {task.tittle} ?</span>
+          <Box display="flex" flexDirection="row-reverse" mt={2}>
+            <Box ml={1}>
+              <Button variant="contained" onClick={hideModal}>
+                Cancel
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleDeleteTask(task)}
+              >
+                Delete
+              </Button>
+            </Box>
+          </Box>
+        </div>
+      </div>
+    );
+  };
 
   renderBoard() {
     const { listTask } = this.props;
@@ -45,6 +102,8 @@ class Taskboard extends Component {
               key={status.value}
               tasks={listTaskFilter}
               status={status}
+              onClickEdit={this.handleEditTask}
+              onClickDelete={this.showModalDeleteTask}
             />
           );
         })}
@@ -73,15 +132,17 @@ class Taskboard extends Component {
   };
 
   openForm = () => {
-    const { modalActionCreators } = this.props;
+    const { taskActionCreators, modalActionCreators } = this.props;
+    const { setTaskEditting } = taskActionCreators;
     const {
       showModal,
       changeModalContent,
       changeModalTittle,
     } = modalActionCreators;
+    setTaskEditting(null);
     showModal();
     changeModalTittle("Add New Job");
-    changeModalContent(<TaskForm/>);
+    changeModalContent(<TaskForm />);
   };
 
   renderForm() {
@@ -133,6 +194,10 @@ Taskboard.propTypes = {
     changeModalTittle: PropTypes.func,
     changeModalContent: PropTypes.func,
   }),
+  handleDeleteTask: PropTypes.func,
+  handelEditTask: PropTypes.func,
+  showModalDeleteTask: PropTypes.func,
+  deleteTask : PropTypes.func
 };
 
 const mapStateToProps = (state) => {
