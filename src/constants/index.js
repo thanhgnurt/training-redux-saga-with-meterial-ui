@@ -1,5 +1,7 @@
 import AdminHomePage from "../container/AdminHomePage";
-import TaskBoard from './../container/Taskboard'
+import Taskboard from './../container/Taskboard';
+import LoginPage from './../container/LoginPage';
+import SignupPage from './../container/SignupPage';
 
 export const END_POINT = "http://localhost:3000";
 
@@ -28,15 +30,30 @@ export const STATUS_CODE = {
 
 export const ADMIN_ROUTES=[
   {
-    path : '/',
+    path : '/admin',
     name : 'Page admin',
     exact : true,
     component : AdminHomePage
   },
   {
-    path : '/task-board',
+    path : '/admin/task-board',
     name : 'Managerment task',
-    exact : true,
-    component : TaskBoard
+    component : Taskboard
   },
+];
+
+export const ROUTES = [
+  {
+    path : '/login',
+    name : "Login",
+    component : LoginPage,
+
+  },
+  {
+    path : '/signup',
+    name : "Sign Up",
+    component : SignupPage,
+
+  },
+
 ]
